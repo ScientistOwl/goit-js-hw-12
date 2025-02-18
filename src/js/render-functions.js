@@ -4,8 +4,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 const lightbox = new SimpleLightbox('.gallery a');
 
-export const renderImages = (images, gallery) => {
-  gallery.innerHTML = '';
+export const renderImages = (images, gallery, append = false) => {
   if (images.length === 0) {
     iziToast.error({
       title: 'Error',
@@ -41,7 +40,11 @@ export const renderImages = (images, gallery) => {
     )
     .join('');
 
-  gallery.insertAdjacentHTML('beforeend', markup);
+  if (append) {
+    gallery.insertAdjacentHTML('beforeend', markup);
+  } else {
+    gallery.innerHTML = markup;
+  }
 
   lightbox.refresh();
 };
